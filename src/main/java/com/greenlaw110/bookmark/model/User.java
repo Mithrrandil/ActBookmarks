@@ -105,7 +105,7 @@ public class User extends MorphiaModel<User> {
         return bookmarks.size();
     }
 
-    public Bookmark getBookmark(String bookmarkId) {
+    public Bookmark getBookmark(Long bookmarkId) {
         return bookmarks.get(bookmarkId);
     }
 

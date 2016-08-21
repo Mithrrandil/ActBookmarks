@@ -1,4 +1,4 @@
-package com.greenlaw110.bookmark.aaa;
+package com.greenlaw110.bookmark.security;
 
 import act.aaa.ActAAAService;
 import act.util.SingletonBase;

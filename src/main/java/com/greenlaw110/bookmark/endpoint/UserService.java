@@ -1,16 +1,20 @@
 package com.greenlaw110.bookmark.endpoint;
 
 import act.app.CliContext;
+import act.app.DbServiceManager;
 import act.cli.Command;
 import act.cli.JsonView;
 import act.cli.Required;
-import act.controller.Controller;
+import act.db.DbService;
+import act.db.morphia.MorphiaService;
+import act.db.util.SequenceNumberGenerator;
 import act.util.PropertySpec;
 import com.greenlaw110.bookmark.model.Bookmark;
 import com.greenlaw110.bookmark.model.User;
-import org.osgl.aaa.NoAuthentication;
-import org.osgl.mvc.annotation.GetAction;
-import org.osgl.mvc.annotation.PostAction;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import org.mongodb.morphia.DatastoreImpl;
+import org.osgl.inject.annotation.Provided;
 import org.osgl.util.C;
 
 import javax.inject.Inject;
@@ -46,13 +50,35 @@ public class UserService {
     }
 
     @Command(name = "db.init", help = "init database (Note, this will clean up all existing data!)")
-    public void initDb(CliContext ctx) {
-        userDao.drop();
-        User user = new User("Phil", "1");
-        user.addBookmark(new Bookmark("http://economist.com", "Cool reading"));
-        user.addBookmark(new Bookmark("http://time.com", "Some news"));
-        userDao.save(user);
+    public void initDb(
+            @Provided DbServiceManager dbServiceManager,
+            @Provided CliContext ctx
+    ) {
+        resetDatabase(dbServiceManager);
+
+        createSample("Phil", "1", "economist.com::Cool reading", "time.com::Some news");
+        createSample("Pete", "2", "github.com::A playground", "ibm.com::Be cautious");
+
         ctx.println("DB initialized with sample data");
+    }
+
+    private void resetDatabase(DbServiceManager dbServiceManager) {
+        MorphiaService svc = dbServiceManager.dbService(DbServiceManager.DEFAULT);
+        svc.ds().getDB().dropDatabase();
+    }
+
+    private void createSample(String username, String password, String... bookmarks) {
+        User user = new User(username, password);
+        for (String bookmark : bookmarks) {
+            String[] sa = bookmark.split("::");
+            String url = sa[0];
+            String desc = sa[1];
+            if (!url.startsWith("http")) {
+                url = "http://" + url;
+            }
+            user.addBookmark(new Bookmark(url, desc));
+        }
+        userDao.save(user);
     }
 
 }
