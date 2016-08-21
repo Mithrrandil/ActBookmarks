@@ -22,12 +22,16 @@
  * THE SOFTWARE.
  */
 /**
- * Author:  Dmitry Noranovich <javaeeeee at gmail dot com>
- * Created: 12-Aug-2016
+ * Author:  Gelin Luo <greenlaw110 at gmail dot com>
+ * Created: 21-Aug-2016
  */
 
-create table users (
-    id int auto_increment not null primary key,
-    username varchar(255) unique not null,
-    password varchar(255) not null
-);
+db.users.save({})
+insert into users values
+(null, 'Phil', '1');
+
+set @u_id = (select id from users where username='Phil');
+
+insert into bookmarks values
+(null, 'http://economist.com', 'Cool reading', @u_id),
+(null, 'http://time.com', 'Some news', @u_id);
