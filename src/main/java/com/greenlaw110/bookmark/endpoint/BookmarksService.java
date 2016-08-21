@@ -57,6 +57,9 @@ public class BookmarksService extends Controller.Util {
     @Inject
     private User.Dao userDao;
 
+    @Required("specify the username")
+    private String username;
+
     /**
      * If the user does not exist, then respond with 404
      */
@@ -70,9 +73,7 @@ public class BookmarksService extends Controller.Util {
      *
      * @return list of user's bookmarks.
      */
-    @Command(name = "bookmark.list", help = "show all bookmarks")
     @GetAction
-    @PropertySpec(Bookmark.LIST_VIEW)
     public Collection<Bookmark> getAllBookmarks() {
         return user.getBookmarks();
     }
@@ -82,10 +83,7 @@ public class BookmarksService extends Controller.Util {
      *
      * @param bookmarkId
      */
-    @Command(name = "bookmark.show", help = "show all bookmarks")
     @GetAction("{bookmarkId}")
-    @PropertySpec(Bookmark.DETAIL_VIEW)
-    @JsonView
     public Bookmark getBookmark(@Required("specify the bookmark ID") String bookmarkId) {
         return user.getBookmark(bookmarkId);
     }
