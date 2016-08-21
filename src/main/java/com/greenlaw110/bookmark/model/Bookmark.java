@@ -1,9 +1,7 @@
 package com.greenlaw110.bookmark.model;
 
-import act.Act;
 import act.data.Data;
 import act.db.util.SequenceNumberGenerator;
-import org.osgl.util.S;
 
 @Data
 public class Bookmark {
@@ -22,7 +20,8 @@ public class Bookmark {
      */
     private String description;
 
-    private Bookmark() {}
+    private Bookmark() {
+    }
 
     public Bookmark(String url, String description) {
         this.url = url;

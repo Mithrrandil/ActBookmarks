@@ -43,9 +43,8 @@ import java.util.Map;
 @Entity("users")
 public class User extends MorphiaModel<User> {
 
-    public static final String LIST_VIEW = "username";
-    public static final String DETAIL_VIEW = "username, bookmarks";
-    
+    public static final String LIST_VIEW = "username, bookmarkNum as bookmarks";
+
     /**
      * A username to login to the application.
      */
@@ -100,6 +99,10 @@ public class User extends MorphiaModel<User> {
     
     public Collection<Bookmark> getBookmarks() {
         return bookmarks.values();
+    }
+
+    public int getBookmarkNum() {
+        return bookmarks.size();
     }
 
     public Bookmark getBookmark(String bookmarkId) {

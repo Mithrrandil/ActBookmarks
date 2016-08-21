@@ -159,7 +159,7 @@
                         <argument>-Xmx512m</argument>
                         <argument>-classpath</argument>
                         <classpath/>
-                        <argument>com.pixolut.connectable.Conn</argument>
+                        <argument>com.greenlaw110.bookmark.ActBookmarksApplication</argument>
                     </arguments>
                 </configuration>
             </plugin>
