@@ -23,7 +23,6 @@
  */
 package com.greenlaw110.bookmark.endpoint;
 
-import act.cli.Required;
 import act.controller.Controller;
 import act.db.DbBind;
 import com.greenlaw110.bookmark.model.Bookmark;
