@@ -16,7 +16,7 @@ import javax.inject.Inject;
  * The controller that exposes resource methods to work with bookmarks of
  * the logged in user only
  *
- * @author Gelin LUo <greenlaw110 at gmail dot com>
+ * @author Gelin Luo <greenlaw110 at gmail dot com>
  */
 @Controller("/my/bookmarks")
 @SuppressWarnings("unused")

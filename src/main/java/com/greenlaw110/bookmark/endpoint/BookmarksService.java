@@ -40,7 +40,7 @@ import java.util.Collection;
  *
  * Note all logged in user can have access to resources of all users including self
  *
- * @author Gelin LUo <greenlaw110 at gmail dot com>
+ * @author Gelin Luo <greenlaw110 at gmail dot com>
  */
 @Controller("/{username}/bookmarks")
 @SuppressWarnings("unused")
@@ -77,7 +77,7 @@ public class BookmarksService extends Controller.Util {
      * @param bookmarkId
      */
     @GetAction("{bookmarkId}")
-    public Bookmark getBookmark(@Required("specify the bookmark ID") Long bookmarkId) {
+    public Bookmark getBookmark(Long bookmarkId) {
         return user.getBookmark(bookmarkId);
     }
 
