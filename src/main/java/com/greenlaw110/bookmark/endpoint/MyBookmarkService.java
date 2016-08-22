@@ -53,8 +53,7 @@ public class MyBookmarkService extends Controller.Util {
     @PutAction("{bookmarkId}")
     public Bookmark editBookmark(Long bookmarkId, Bookmark bookmark) {
         notFoundIfNot(me.hasBookmark(bookmarkId));
-        badRequestIfNot($.eq(bookmarkId, bookmark.getId()));
-        me.addBookmark(bookmark);
+        me.updateBookmark(bookmarkId, bookmark);
         userDao.save(me);
         return bookmark;
     }
@@ -67,9 +66,10 @@ public class MyBookmarkService extends Controller.Util {
      * status code.
      */
     @DeleteAction("{bookmarkId}")
-    public Bookmark deleteBookmark(String bookmarkId) {
+    public Bookmark deleteBookmark(Long bookmarkId) {
         Bookmark bookmark = me.deleteBookmark(bookmarkId);
         notFoundIfNull(bookmark);
+        userDao.save(me);
         return bookmark;
     }
 

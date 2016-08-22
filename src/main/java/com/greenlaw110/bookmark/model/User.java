@@ -113,7 +113,7 @@ public class User extends MorphiaModel<User> {
         return bookmarks.containsKey(bookmarkId);
     }
 
-    public Bookmark deleteBookmark(String bookmarkId) {
+    public Bookmark deleteBookmark(Long bookmarkId) {
         return bookmarks.remove(bookmarkId);
     }
 
@@ -125,6 +125,12 @@ public class User extends MorphiaModel<User> {
      */
     public Bookmark addBookmark(Bookmark bookmark) {
         bookmarks.put(bookmark.ensureId(), bookmark);
+        return bookmark;
+    }
+
+    public Bookmark updateBookmark(Long id, Bookmark bookmark) {
+        bookmark.setId(id);
+        bookmarks.put(id, bookmark);
         return bookmark;
     }
 

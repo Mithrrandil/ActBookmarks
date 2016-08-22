@@ -93,26 +93,23 @@ curl -w "\n" 2>/dev/null -H "accept: application/json" localhost:5460/Phil/bookm
 To edit a bookmark the HTTP PUT method is used.
 
 ~~~~
-curl -X PUT -w "\n" 2>/dev/null localhost:8080/my/bookmarks/1 -u Phil:1 \
- -H "Content-Type: application/json, accept: application/json" -d '{"url":"github.com"}'
+curl -X PUT -w "\n" 2>/dev/null localhost:5460/my/bookmarks/1 -u Phil:1 \
+ -H "Content-Type: application/json" -H "accept: application/json" -d '{"url":"github.com"}'
 ~~~~
 
 To add a bookmark use the following.
 
 ~~~~
- curl -X POST -w "\n" 2>/dev/null localhost:8080/Phil/bookmarks \
- -u Phil:1 -H "Content-Type: application/json" \
+ curl -X POST -w "\n" 2>/dev/null localhost:5460/my/bookmarks \
+ -u Phil:1 -H "Content-Type: application/json" -H "accept: application/json" \
  -d '{"url":"http://github.com", "description":"A lot of great projects"}'
 ~~~~
 
 To remove a bookmark the HTTP DELETE method is used.
 
 ~~~~
-curl -X DELETE -w "\n" 2>/dev/null localhost:8080/Phil/bookmarks/3 \
- -u Phil:1
+curl -X DELETE -w "\n" 2>/dev/null -H "accept: application/json" \
+localhost:5460/my/bookmarks/1 -u Phil:1
 ~~~~
 
-The project contains a lot of test examples based on Spring Boot Test Starter
-and Spring Security Test. There are examples of how to test repositories and 
-resource methods including the case when the latter are secured with Basic
-Authentication.
+The testing case will come up with the following updates to the project
