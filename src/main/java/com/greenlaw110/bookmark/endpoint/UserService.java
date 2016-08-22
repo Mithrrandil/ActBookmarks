@@ -26,6 +26,7 @@ public class UserService {
     private User.Dao userDao;
 
     @Command(name = "user.add", help = "add an new user")
+    @PropertySpec(User.DETAIL_VIEW)
     @JsonView
     public User addUser(
             @Required String username,
@@ -43,6 +44,7 @@ public class UserService {
     }
 
     @Command(name = "user.show", help = "show user")
+    @PropertySpec(User.DETAIL_VIEW)
     @JsonView
     public User show(@Required String username) {
         return userDao.findOneBy("username", username);

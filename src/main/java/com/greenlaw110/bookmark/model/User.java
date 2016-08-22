@@ -44,6 +44,7 @@ import java.util.Map;
 public class User extends MorphiaModel<User> {
 
     public static final String LIST_VIEW = "username, bookmarkNum as bookmarks";
+    public static final String DETAIL_VIEW = "-password";
 
     /**
      * A username to login to the application.
