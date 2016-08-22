@@ -6,9 +6,6 @@ import act.db.util.SequenceNumberGenerator;
 @Data
 public class Bookmark {
 
-    public static final String LIST_VIEW = "id, url";
-    public static final String DETAIL_VIEW = LIST_VIEW + ", description";
-
     private Long id;
 
     /**

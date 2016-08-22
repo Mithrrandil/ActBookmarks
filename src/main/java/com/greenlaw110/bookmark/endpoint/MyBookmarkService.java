@@ -5,7 +5,6 @@ import act.controller.Controller;
 import com.greenlaw110.bookmark.annotation.LoginUser;
 import com.greenlaw110.bookmark.model.Bookmark;
 import com.greenlaw110.bookmark.model.User;
-import org.osgl.$;
 import org.osgl.http.H;
 import org.osgl.mvc.annotation.DeleteAction;
 import org.osgl.mvc.annotation.PostAction;
@@ -14,7 +13,10 @@ import org.osgl.mvc.annotation.PutAction;
 import javax.inject.Inject;
 
 /**
- * Operate on login user's bookmarks
+ * The controller that exposes resource methods to work with bookmarks of
+ * the logged in user only
+ *
+ * @author Gelin LUo <greenlaw110 at gmail dot com>
  */
 @Controller("/my/bookmarks")
 @SuppressWarnings("unused")

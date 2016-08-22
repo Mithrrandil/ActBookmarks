@@ -35,12 +35,15 @@ import javax.inject.Inject;
 import java.util.Collection;
 
 /**
- * The controller that exposes resource methods to work with bookmarks for a
+ * The controller that exposes resource methods to work with bookmarks of a
  * particular user.
  *
- * @author Dmitry Noranovich <javaeeeee at gmail dot com>
+ * Note all logged in user can have access to resources of all users including self
+ *
+ * @author Gelin LUo <greenlaw110 at gmail dot com>
  */
 @Controller("/{username}/bookmarks")
+@SuppressWarnings("unused")
 public class BookmarksService extends Controller.Util {
 
     @Inject
@@ -49,9 +52,6 @@ public class BookmarksService extends Controller.Util {
 
     @Inject
     private User.Dao userDao;
-
-    @Required("specify the username")
-    private String username;
 
     /**
      * If the user does not exist, then respond with 404

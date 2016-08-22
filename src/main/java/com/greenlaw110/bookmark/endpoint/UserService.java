@@ -5,21 +5,20 @@ import act.app.DbServiceManager;
 import act.cli.Command;
 import act.cli.JsonView;
 import act.cli.Required;
-import act.db.DbService;
 import act.db.morphia.MorphiaService;
-import act.db.util.SequenceNumberGenerator;
 import act.util.PropertySpec;
 import com.greenlaw110.bookmark.model.Bookmark;
 import com.greenlaw110.bookmark.model.User;
-import com.mongodb.DB;
-import com.mongodb.DBCollection;
-import org.mongodb.morphia.DatastoreImpl;
 import org.osgl.inject.annotation.Provided;
 import org.osgl.util.C;
 
 import javax.inject.Inject;
 import java.util.List;
 
+/**
+ * The endpoint provides CLI commands for adding/visiting
+ * users
+ */
 @SuppressWarnings("unused")
 public class UserService {
 
