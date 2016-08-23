@@ -22,7 +22,6 @@ import javax.inject.Inject;
 @SuppressWarnings("unused")
 public class MyBookmarkService extends Controller.Util {
 
-    @Inject
     @LoginUser
     private User me;
 

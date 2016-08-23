@@ -56,7 +56,7 @@ ActBookmark[2kbNDCU1]>
 Now you have two users created: 
 
 * *Phil* and password *1*
-* "Pete" and password *2*
+* *Pete* and password *2*
 
 You can type `user.list` in the ACT Console:
 

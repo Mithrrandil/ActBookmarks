@@ -23,6 +23,8 @@
  */
 package com.greenlaw110.bookmark.endpoint;
 
+import act.cli.Command;
+import act.cli.Required;
 import act.controller.Controller;
 import act.db.DbBind;
 import com.greenlaw110.bookmark.model.Bookmark;
@@ -31,6 +33,7 @@ import org.osgl.mvc.annotation.Before;
 import org.osgl.mvc.annotation.GetAction;
 
 import javax.inject.Inject;
+import javax.inject.Named;
 import java.util.Collection;
 
 /**
@@ -45,8 +48,9 @@ import java.util.Collection;
 @SuppressWarnings("unused")
 public class BookmarksService extends Controller.Util {
 
-    @Inject
-    @DbBind(value = "username", byId = false)
+    @DbBind(byId = false)
+    @Named("username")
+    @Required("specify user by username")
     private User user;
 
     @Inject
@@ -65,6 +69,7 @@ public class BookmarksService extends Controller.Util {
      *
      * @return list of user's bookmarks.
      */
+    @Command("bm.list")
     @GetAction
     public Collection<Bookmark> getAllBookmarks() {
         return user.getBookmarks();
@@ -75,8 +80,9 @@ public class BookmarksService extends Controller.Util {
      *
      * @param bookmarkId
      */
+    @Command("bm.show")
     @GetAction("{bookmarkId}")
-    public Bookmark getBookmark(Long bookmarkId) {
+    public Bookmark getBookmark(@Required("specify bookmark ID") Long bookmarkId) {
         return user.getBookmark(bookmarkId);
     }
 
