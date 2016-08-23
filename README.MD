@@ -156,7 +156,34 @@ running mode: DEV
 ActBookmark[2k93vL52]>
 ```
 
-Then type in `bm.list -u Pete`:
+Then type in `help -a` to check all application commands:
+
+```
+APPLICATION COMMANDS
+
+bm.list       - show all bookmarks of the specified person
+bm.show       - show specific bookmark of the specified person
+db.init       - init database (Note, this will clean up all existing data!)
+user.add      - add an new user
+user.list     - list all users
+user.show     - show user
+```
+
+To check detail of a certain command type `help <command-name>` or `<command-name> -h`:
+
+```
+bm.list -h
+Usage: bm.list
+show all bookmarks of the specified person
+
+Options:
+  -u,--user     specify user by username
+
+Shortcuts: .bl, b.l, b.list, bm.l, bm.li
+ActBookmark[2k93vLo1]>
+```
+
+One can type in `bm.list -u Pete` to list all bookmarks of user `Pete`
 
 ```
 bm.list -u Pete
@@ -169,4 +196,3 @@ bm.list -u Pete
 Items found: 2
 ```
 
-TBC...
