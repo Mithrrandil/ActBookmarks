@@ -1,11 +1,9 @@
 package com.greenlaw110.bookmark.endpoint;
 
-import act.controller.Controller;
 import org.osgl.aaa.NoAuthentication;
 import org.osgl.mvc.annotation.GetAction;
 import org.osgl.util.S;
 
-@Controller("/hello")
 @NoAuthentication
 @SuppressWarnings("unused")
 public class HelloService {
@@ -21,7 +19,7 @@ public class HelloService {
      * @param name The name of a person to greet.
      * @return Customized greeting.
      */
-    @GetAction({"{name}", ""})
+    @GetAction("/hello/{name}")
     public String getPathParamOrQueryParamGreeting(String name) {
         return S.blank(name) ? GREETING : "Hello " + name;
     }
