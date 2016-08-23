@@ -113,3 +113,60 @@ localhost:5460/my/bookmarks/1 -u Phil:1
 ~~~~
 
 The testing case will come up with the following updates to the project
+
+## Play with CLI
+
+CLI is the friend to system administrator. ActFramework makes it super easy
+to create CLI command, and you can even share the same code to serve both
+HTTP request and CLI command:
+
+In the `BookmarkService`, we have the following code:
+
+```java
+    @Command("bm.list")
+    @GetAction
+    public Collection<Bookmark> getAllBookmarks() {
+        return user.getBookmarks();
+    }
+```
+
+Which denote the method `getAllBookmarks()` as the HTTP GET request handler 
+at `/{username}/bookmarks` which is defined in the `@Controller` class
+annotation; And it mark the method as the command executor for `bm.list`
+command at the same time. We have already seen how to use RESTful 
+request to check all bookmarks of a user. Now we are going to use CLI command
+to do the same job.
+
+First use telnet or nc or any other similar to to hook into ACT's CLI console
+session:
+
+```
+GreenLaptop:ActBookmarks luog$ nc localhost 5461
+    _           _    ____                 _                             _
+   / \     ___ | |_ | __ )   ___    ___  | | __ _ __ ___    __ _  _ __ | | __
+  / _ \   / __|| __||  _ \  / _ \  / _ \ | |/ /| '_ ` _ \  / _` || '__|| |/ /
+ / ___ \ | (__ | |_ | |_) || (_) || (_) ||   < | | | | | || (_| || |   |   <
+/_/   \_\ \___| \__||____/  \___/  \___/ |_|\_\|_| |_| |_| \__,_||_|   |_|\_\
+
+ App: 0.0.1
+ Act: v0.2.0-89bb
+current dir: /Users/luog/p/greenlaw110/ActBookmarks
+config profile: dev
+running mode: DEV
+ActBookmark[2k93vL52]>
+```
+
+Then type in `bm.list -u Pete`:
+
+```
+bm.list -u Pete
++----+--------------+-------------------+
+| ID |  DESCRIPTION |        URL        |
++----+--------------+-------------------+
+|  3 | A playground | http://github.com |
+|  4 | Be cautious  | http://ibm.com    |
++----+--------------+-------------------+
+Items found: 2
+```
+
+TBC...
