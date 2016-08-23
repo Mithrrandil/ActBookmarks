@@ -16,6 +16,9 @@ public class HelloService {
      * The resource method with a path parameter or query parameter
      * to return customized greeting.
      *
+     * When `name` is not found then it will return the
+     * default {@link #GREETING}
+     *
      * @param name The name of a person to greet.
      * @return Customized greeting.
      */
