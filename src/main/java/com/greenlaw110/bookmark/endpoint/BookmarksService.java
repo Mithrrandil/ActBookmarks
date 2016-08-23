@@ -32,6 +32,7 @@ import com.greenlaw110.bookmark.model.User;
 import org.osgl.mvc.annotation.Before;
 import org.osgl.mvc.annotation.GetAction;
 
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.Collection;
@@ -51,6 +52,7 @@ public class BookmarksService extends Controller.Util {
     @DbBind(byId = false)
     @Named("username")
     @Required("specify user by username")
+    @SessionScoped
     private User user;
 
     @Inject
@@ -69,7 +71,7 @@ public class BookmarksService extends Controller.Util {
      *
      * @return list of user's bookmarks.
      */
-    @Command("bm.list")
+    @Command(value = "bm.list", help = "show all bookmarks of the specified person")
     @GetAction
     public Collection<Bookmark> getAllBookmarks() {
         return user.getBookmarks();
@@ -80,7 +82,7 @@ public class BookmarksService extends Controller.Util {
      *
      * @param bookmarkId
      */
-    @Command("bm.show")
+    @Command(value = "bm.show", help = "show specific bookmark of the specified person")
     @GetAction("{bookmarkId}")
     public Bookmark getBookmark(@Required("specify bookmark ID") Long bookmarkId) {
         return user.getBookmark(bookmarkId);
