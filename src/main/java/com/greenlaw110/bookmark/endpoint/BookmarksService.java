@@ -24,6 +24,7 @@
 package com.greenlaw110.bookmark.endpoint;
 
 import act.cli.Command;
+import act.cli.JsonView;
 import act.cli.Required;
 import act.controller.Controller;
 import act.db.DbBind;
@@ -84,6 +85,7 @@ public class BookmarksService extends Controller.Util {
      */
     @Command(value = "bm.show", help = "show specific bookmark of the specified person")
     @GetAction("{bookmarkId}")
+    @JsonView
     public Bookmark getBookmark(@Required("specify bookmark ID") Long bookmarkId) {
         return user.getBookmark(bookmarkId);
     }
