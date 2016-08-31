@@ -141,7 +141,11 @@ public class User extends MorphiaModel<User> {
         }
 
         public User authenticate(String username, String password) {
-            return findOneBy("username, password", username, Act.crypto().passwordHash(password));
+            User user = findOneBy("username", username);
+            if (Act.crypto().verifyPassword(password, user.getPassword())) {
+                return user;
+            }
+            return null;
         }
     }
 
