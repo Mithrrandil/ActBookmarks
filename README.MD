@@ -4,7 +4,8 @@ This is a simple application to store bookmarks exposing REST API.
 This application uses [ActFramework](https://github.com/actframework/actframework)
 and [MongoDB](mongodb.org) to store data.
 
-To use this application, you must have Java, Maven and MongoDB installed.
+To use this application, you must have [Java](http://www.oracle.com/technetwork/java/javase/downloads/index-jsp-138363.html), [Maven](http://maven.apache.org/download.cgi) and [MongoDB](https://www.mongodb.com/download-center) downloaded and installed.
+
 You must have MongoDB running before using this application. 
 
 ## Load Init Data
