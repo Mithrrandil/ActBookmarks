@@ -1,6 +1,6 @@
 package com.greenlaw110.bookmark.model;
 
-import act.data.Data;
+import act.data.annotation.Data;
 import act.db.util.SequenceNumberGenerator;
 
 @Data

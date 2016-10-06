@@ -1,7 +1,7 @@
 package com.greenlaw110.bookmark.endpoint;
 
-import act.app.CliContext;
 import act.app.DbServiceManager;
+import act.cli.CliContext;
 import act.cli.Command;
 import act.cli.JsonView;
 import act.cli.Required;
@@ -9,7 +9,9 @@ import act.db.morphia.MorphiaService;
 import act.util.PropertySpec;
 import com.greenlaw110.bookmark.model.Bookmark;
 import com.greenlaw110.bookmark.model.User;
+import org.osgl.aaa.NoAuthentication;
 import org.osgl.inject.annotation.Provided;
+import org.osgl.mvc.annotation.PostAction;
 import org.osgl.util.C;
 
 import javax.inject.Inject;
@@ -29,8 +31,8 @@ public class UserService {
     @PropertySpec(User.DETAIL_VIEW)
     @JsonView
     public User addUser(
-            @Required String username,
-            @Required String password
+            @Required("specify username") String username,
+            @Required("specify password") String password
     ) {
         User user = new User(username, password);
         userDao.save(user);

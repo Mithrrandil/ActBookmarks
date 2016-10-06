@@ -38,7 +38,7 @@ import java.util.Map;
 /**
  * A class to store application user data.
  *
- * @author Dmitry Noranovich <javaeeeee at gmail dot com>
+ * @author Gelin Luo <greenlaw110 at gmail dot com>
  */
 @Entity("users")
 public class User extends MorphiaModel<User> {
@@ -140,7 +140,7 @@ public class User extends MorphiaModel<User> {
             super(User.class);
         }
 
-        public User authenticate(String username, String password) {
+        public User authenticate(String username, char[] password) {
             User user = findOneBy("username", username);
             if (Act.crypto().verifyPassword(password, user.getPassword())) {
                 return user;

@@ -14,6 +14,12 @@ public class SecurityService extends SingletonBase implements ActAAAService {
 
     private User.Dao userDao;
 
+    @Override
+    public Principal authenticate(String email, char[] password) {
+        User user = userDao.authenticate(email, password);
+        return null == user ? null : getPrincipal(user);
+    }
+
     @Inject
     public SecurityService(User.Dao userDao) {
         this.userDao = userDao;
@@ -37,7 +43,7 @@ public class SecurityService extends SingletonBase implements ActAAAService {
 
     @Override
     public Principal authenticate(String email, String password) {
-        User user = userDao.authenticate(email, password);
+        User user = userDao.authenticate(email, password.toCharArray());
         return null == user ? null : getPrincipal(user);
     }
 
