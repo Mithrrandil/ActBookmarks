@@ -45,19 +45,16 @@ under the License.
       </includes>
     </fileSet>
     <fileSet>
-      <directory>${project.basedir}/src/bin</directory>
-      <outputDirectory>bin</outputDirectory>
-      <includes>
-        <include>conf</include>
-        <include>install</include>
-        <include>conn</include>
-        <include>upgrade</include>
-        <!--<include>start</include>-->
-      </includes>
-    </fileSet>
-    <fileSet>
       <directory>${project.basedir}/src/main/asset</directory>
       <outputDirectory>asset</outputDirectory>
+    </fileSet>
+    <fileSet>
+      <directory>${project.basedir}/src/main/bin</directory>
+      <outputDirectory></outputDirectory>
+      <includes>
+        <include>start*</include>
+      </includes>
+      <filtered>true</filtered>
     </fileSet>
   </fileSets>
 

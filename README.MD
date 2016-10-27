@@ -8,6 +8,61 @@ To use this application, you must have [Java](http://www.oracle.com/technetwork/
 
 You must have MongoDB running before using this application. 
 
+## Start application
+
+Start the application in dev mode
+
+```
+mvn clean compile exec:exec
+```
+
+Start the application in prod mode
+
+```
+mvn clean package
+cd target/dist
+unzip *
+./start
+```
+
+Once application has been started, you should see something like:
+
+```
+   / \     ___ | |_ | __ )   ___    ___  | | __ _ __ ___    __ _  _ __ | | __
+  / _ \   / __|| __||  _ \  / _ \  / _ \ | |/ /| '_ ` _ \  / _` || '__|| |/ /
+ / ___ \ | (__ | |_ | |_) || (_) || (_) ||   < | | | | | || (_| || |   |   < 
+/_/   \_\ \___| \__||____/  \___/  \___/ |_|\_\|_| |_| |_| \__,_||_|   |_|\_\
+                                                                             
+                                          powered by ActFramework v0.3.0-38e7
+
+ version: 0.0.1
+base dir: /home/luog/p/greenlaw110/ActBookmarks/target/dist
+ profile: prod
+    mode: PROD
+
+Oct 28, 2016 6:49:27 AM org.mongodb.morphia.logging.MorphiaLoggerFactory chooseLoggerFactory
+INFO: LoggerImplFactory set to org.mongodb.morphia.logging.jdk.JDKLoggerFactory
+06:49:27.878 [main] INFO  a.Act - loading application(s) ...
+06:49:27.882 [main] INFO  a.Act - App starting ....
+06:49:27.940 [main] WARN  a.c.AppConfig - Application secret key not set! You are in the dangerous zone!!!
+06:49:27.964 [main] WARN  a.a.DbServiceManager - DB configuration not found. Will try to init default service with the sole db plugin: act.db.morphia.MorphiaPlugin@6ca367aa
+06:49:28.054 [main] INFO  o.m.d.cluster - Cluster created with settings {hosts=[localhost:27017], mode=SINGLE, requiredClusterType=UNKNOWN, serverSelectionTimeout='30000 ms', maxWaitQueueSize=500}
+06:49:28.131 [cluster-ClusterId{value='58125a48276a8c4147016ace', description='null'}-localhost:27017] INFO  o.m.d.connection - Opened connection [connectionId{localValue:1, serverValue:223}] to localhost:27017
+06:49:28.133 [cluster-ClusterId{value='58125a48276a8c4147016ace', description='null'}-localhost:27017] INFO  o.m.d.cluster - Monitor thread successfully connected to server with description ServerDescription{address=localhost:27017, type=STANDALONE, state=CONNECTED, ok=true, version=ServerVersion{versionList=[3, 2, 10]}, minWireVersion=0, maxWireVersion=4, maxDocumentSize=16777216, roundTripTimeNanos=993392}
+06:49:28.284 [main] WARN  a.m.MailerConfig - smtp host configuration not found, will use mock smtp to send email
+06:49:28.284 [main] WARN  a.c.AppConfig - host is not configured. Use localhost as hostname
+06:49:28.480 [main] INFO  o.m.d.connection - Opened connection [connectionId{localValue:2, serverValue:224}] to localhost:27017
+06:49:28.492 [main] WARN  a.Act - acl.yaml file not found...
+06:49:28.494 [main] INFO  a.Act - App[ActBookmark] loaded in 612ms
+06:49:28.507 [main] INFO  o.xnio - XNIO version 3.3.6.Final
+06:49:28.520 [main] INFO  o.x.nio - XNIO NIO Implementation Version 3.3.6.Final
+06:49:28.586 [main] INFO  a.Act - network client hooked on port: 5460
+06:49:28.587 [main] INFO  a.Act - CLI server started on port: 5461
+06:49:28.587 [main] INFO  a.b.a.RunApp - it takes 1693ms to start the app
+```
+
+Once application started you can proceed with the next step:
+
 ## Load Init Data
 
 Unlike the upstream project [SpringBootBookmarks](https://github.com/javaeeeee/SpringBootBookmarks), 
@@ -15,43 +70,43 @@ ActBookmarks stores hashed password into the database, thus the init
 data must be created through the application. Here is the steps to load
 init data:
 
-First run the app:
-
-```
-mvn clean compile exec:exec
-```
-
-Now move to another console and type
+Open another console and type:
 
 ```
 nc localhost 5461
 ```
 (Note, if you don't have `nc` try `telnet`)
 
+**Tips** If you have installed [rlwrap](https://github.com/hanslub42/rlwrap), use it along wit `nc` or `telnet`:
+
+```
+rlwrap nc localhost 5461
+```
+
 This will bring you into the ACT console and you should see something like:
 
 ```
-    _           _    ____                 _                             _
    / \     ___ | |_ | __ )   ___    ___  | | __ _ __ ___    __ _  _ __ | | __
   / _ \   / __|| __||  _ \  / _ \  / _ \ | |/ /| '_ ` _ \  / _` || '__|| |/ /
- / ___ \ | (__ | |_ | |_) || (_) || (_) ||   < | | | | | || (_| || |   |   <
+ / ___ \ | (__ | |_ | |_) || (_) || (_) ||   < | | | | | || (_| || |   |   < 
 /_/   \_\ \___| \__||____/  \___/  \___/ |_|\_\|_| |_| |_| \__,_||_|   |_|\_\
+                                                                             
+                                          powered by ActFramework v0.3.0-38e7
 
- App: 0.0.1
- Act: v0.2.0-70b2
-current dir: /Users/luog/p/greenlaw110/ActBookmarks
-config profile: dev
-running mode: DEV
-ActBookmark[2kbNDCU1]>
+ version: 0.0.1
+base dir: /home/luog/p/greenlaw110/ActBookmarks/target/dist
+ profile: prod
+    mode: PROD
+ActBookmark[2kbNDb01]>
 ```
 
 Now type in `db.init` and you should see something like:
 
 ```
-ActBookmark[2kbNDCU1]>db.init
+ActBookmark[2kbNDb01]>db.init
 db.init
 DB initialized with sample data
-ActBookmark[2kbNDCU1]>
+ActBookmark[2kbNDb01]>
 ```
 
 Now you have two users created: 
@@ -62,7 +117,7 @@ Now you have two users created:
 You can type `user.list` in the ACT Console:
 
 ```
-ActBookmark[2kbNDCU2]>user.list
+ActBookmark[2kbNDb01]>user.list
 user.list
 +----------+-----------+
 | USERNAME | BOOKMARKS |
@@ -71,7 +126,7 @@ user.list
 | Pete     |         2 |
 +----------+-----------+
 Items found: 2
-ActBookmark[2kbNDCU2]>
+ActBookmark[2kbNDb01]>
 ```
 
 ## Play with RESTful API
@@ -143,18 +198,18 @@ session:
 
 ```
 GreenLaptop:ActBookmarks luog$ nc localhost 5461
-    _           _    ____                 _                             _
    / \     ___ | |_ | __ )   ___    ___  | | __ _ __ ___    __ _  _ __ | | __
   / _ \   / __|| __||  _ \  / _ \  / _ \ | |/ /| '_ ` _ \  / _` || '__|| |/ /
- / ___ \ | (__ | |_ | |_) || (_) || (_) ||   < | | | | | || (_| || |   |   <
+ / ___ \ | (__ | |_ | |_) || (_) || (_) ||   < | | | | | || (_| || |   |   < 
 /_/   \_\ \___| \__||____/  \___/  \___/ |_|\_\|_| |_| |_| \__,_||_|   |_|\_\
+                                                                             
+                                          powered by ActFramework v0.3.0-38e7
 
- App: 0.0.1
- Act: v0.2.0-89bb
-current dir: /Users/luog/p/greenlaw110/ActBookmarks
-config profile: dev
-running mode: DEV
-ActBookmark[2k93vL52]>
+ version: 0.0.1
+base dir: /home/luog/p/greenlaw110/ActBookmarks/target/dist
+ profile: prod
+    mode: PROD
+ActBookmark[2kbNDb01]>
 ```
 
 Then type in `help -a` to check all application commands:
@@ -181,7 +236,7 @@ Options:
   -u,--user     specify user by username
 
 Shortcuts: .bl, b.l, b.list, bm.l, bm.li
-ActBookmark[2k93vLo1]>
+ActBookmark[2kbNDb01]>
 ```
 
 One can type in `bm.list -u Pete` to list all bookmarks of user `Pete`
