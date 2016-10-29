@@ -97,6 +97,10 @@ public class User extends MorphiaModel<User> {
     public void setPassword(String password) {
         this.password = Act.crypto().passwordHash(password);
     }
+
+    public boolean passwordMatches(char[] password) {
+        return Act.crypto().verifyPassword(password, getPassword());
+    }
     
     public Collection<Bookmark> getBookmarks() {
         return bookmarks.values();
@@ -142,7 +146,7 @@ public class User extends MorphiaModel<User> {
 
         public User authenticate(String username, char[] password) {
             User user = findOneBy("username", username);
-            if (Act.crypto().verifyPassword(password, user.getPassword())) {
+            if (user.passwordMatches(password)) {
                 return user;
             }
             return null;

@@ -1,8 +1,8 @@
 package com.greenlaw110.bookmark.endpoint;
 
+import act.aaa.LoginUser;
 import act.app.ActionContext;
 import act.controller.Controller;
-import com.greenlaw110.bookmark.annotation.LoginUser;
 import com.greenlaw110.bookmark.model.Bookmark;
 import com.greenlaw110.bookmark.model.User;
 import org.osgl.http.H;

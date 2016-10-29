@@ -30,6 +30,7 @@ import act.controller.Controller;
 import act.db.DbBind;
 import com.greenlaw110.bookmark.model.Bookmark;
 import com.greenlaw110.bookmark.model.User;
+import org.osgl.aaa.NoAuthentication;
 import org.osgl.mvc.annotation.Before;
 import org.osgl.mvc.annotation.GetAction;
 
